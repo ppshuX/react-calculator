@@ -1,0 +1,30 @@
+import React, { Component } from 'react';
+import NavBar from './navbar';
+import { Route, Routes } from 'react-router-dom';
+import Home from './content/home';
+import Calculator from './content/calculator';
+import Login from './content/login';
+import Register from './content/register';
+import NotFound from './content/notfound';
+
+class App extends Component {
+    state = {}
+    render() {
+        return (
+            <React.Fragment>
+                <NavBar />
+                <div className='container'>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/calculator' element={<Calculator />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='*' element={<NotFound />} />
+                    </Routes>
+                </div>
+            </React.Fragment>
+        );
+    }
+}
+
+export default App;
