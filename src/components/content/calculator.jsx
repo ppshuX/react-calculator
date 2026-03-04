@@ -10,36 +10,44 @@ class Calculator extends Component {
         formater: Intl.NumberFormat('en-us')
     };
 
+    format = number => {
+        if (number === "") return "";
+        const [integer, decimal] = number.split('.');
+        if (decimal === undefined)
+            return this.state.formater.format(integer);
+        return `${this.state.formater.format(integer)}.${decimal}`;
+    }
+
     render() {
         return (
             <Base>
                 <div className="calculator">
                     <div className="output">
                         <div className="last-output">
-                            {this.state.formater.format(this.props.lastOperand)} {this.props.operation}
+                            {this.format(this.props.lastOperand)} {this.props.operation}
                         </div>
                         <div className="current-output">
-                            {this.state.formater.format(this.props.currentOperand)}
+                            {this.format(this.props.currentOperand)}
                         </div>
                     </div>
                     <button onClick={this.props.clear} className='button-ac'>AC</button>
                     <button onClick={this.props.delete_digit}>Del</button>
-                    <OperationButton operation={"÷"}/>
+                    <OperationButton operation={"÷"} />
                     <DigitButton digit={"7"} />
                     <DigitButton digit={"8"} />
                     <DigitButton digit={"9"} />
-                    <OperationButton operation={"×"}/>
+                    <OperationButton operation={"×"} />
                     <DigitButton digit={"4"} />
                     <DigitButton digit={"5"} />
                     <DigitButton digit={"6"} />
-                    <OperationButton operation={"-"}/>
+                    <OperationButton operation={"-"} />
                     <DigitButton digit={"1"} />
                     <DigitButton digit={"2"} />
                     <DigitButton digit={"3"} />
-                    <OperationButton operation={"+"}/>
+                    <OperationButton operation={"+"} />
                     <DigitButton digit={"0"} />
                     <DigitButton digit={"."} />
-                    <button onClick={this.props.evaluate} className='button-equal' onClick={this.props.evaluate}>=</button>
+                    <button onClick={this.props.evaluate} className='button-equal'>=</button>
                 </div>
             </Base>
         );

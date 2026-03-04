@@ -4,7 +4,7 @@ class Base extends Component {
     state = {  } 
     render() { 
         return (
-            <div className="card">
+            <div className="card" style={{ marginTop: "20px" }}>
                 <div className="card-body">
                     {this.props.children}
                 </div>

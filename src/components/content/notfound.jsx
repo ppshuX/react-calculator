@@ -6,7 +6,7 @@ class NotFound extends Component {
     render() { 
         return (
             <Base>
-                <h1>404</h1>
+                404
             </Base>
         );
     }
