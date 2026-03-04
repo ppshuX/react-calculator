@@ -1,80 +1,224 @@
-# Calculator App
+# React Calculator App
 
-基于 Create React App 的 React 计算器应用，支持登录/注册，未登录显示首页/登录/注册，登录后显示计算器与退出。路由统一在 `/calculator` 下，与 AcWing 后端接口对接。
+[![React](https://img.shields.io/badge/React-19-blue)]()
+[![Redux](https://img.shields.io/badge/Redux-Toolkit-purple)]()
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5-blueviolet)]()
+[![License](https://img.shields.io/badge/license-MIT-green)]()
 
-## 技术栈
+🔗 **GitHub Repository**
 
-- **React** 19
-- **React Router DOM** 7
-- **Bootstrap** 5
-- **Redux** + **React Redux** + **@reduxjs/toolkit**（计算器状态）
-- **jQuery**（AJAX：get_status / login / register / logout）
-
-## 项目结构
-
-```
-src/
-├── index.js                 # 入口，Redux Provider + BrowserRouter
-├── index.css                # 全局样式
-├── components/
-│   ├── app.jsx              # 根组件：get_status、路由、登录成功回调
-│   ├── navbar.jsx           # 顶部导航（按 is_login 显示 计算器/退出 或 登录/注册）
-│   └── content/
-│       ├── base.jsx         # 卡片布局，各页面内容包裹其中
-│       ├── home.jsx         # 首页
-│       ├── calculator.jsx   # 计算器（Redux 连接）
-│       ├── calculator/
-│       │   ├── digitButton.jsx
-│       │   └── operationButton.jsx
-│       ├── login.jsx        # 登录
-│       ├── register.jsx     # 注册
-│       └── notfound.jsx     # 404
-├── redux/
-│   ├── store.js             # configureStore
-│   ├── reducer.js           # 计算器 state（currentOperand, lastOperand, operation 等）
-│   └── actions.js           # ADD_DIGIT, DELETE_DIGIT, CHOOSE_OPERATION, CLEAR, EVALUATE
-```
-
-## 本地运行
-
-```bash
-npm install
-npm start
-```
-
-浏览器访问 [http://localhost:3000](http://localhost:3000)，根路径会重定向到 `/calculator`。
-
-## 可用脚本
-
-| 命令 | 说明 |
-|------|------|
-| `npm start` | 开发模式 |
-| `npm run build` | 生产构建到 `build` |
-| `npm test` | 运行测试 |
-| `npm run eject` | 弹出 CRA 配置（不可逆） |
-
-## 路由
-
-| 路径 | 说明 |
-|------|------|
-| `/` | 重定向到 `/calculator` |
-| `/calculator` | 首页 |
-| `/calculator/home` | 首页 |
-| `/calculator/calculator` | 计算器（需登录，未登录跳转登录页） |
-| `/calculator/login` | 登录（已登录跳转首页） |
-| `/calculator/register` | 注册（已登录跳转首页） |
-| `/calculator/404` | 404 页 |
-| `/calculator/*` | 其他未匹配路径 → 404 |
-
-## 后端接口（AcWing）
-
-- `GET .../calculator/get_status/`：获取登录状态，返回 `{ result: "login", username }` 或未登录
-- `GET .../calculator/login/`：登录（params: username, password），成功返回 `{ result: "success" }`
-- `GET .../calculator/register/`：注册（params: username, password, password_confirm）
-- `GET .../calculator/logout/`：退出，成功返回 `{ result: "success" }`
-
-前端与 demo 逻辑对齐；在 localhost 跨域时，登录成功通过 `onLoginSuccess` 在前端更新 `is_login` 并跳转到计算器页，以便不刷新也能看到计算器。
+https://github.com/ppshuX/react-calculator
 
 ---
 
-本项目由 [Create React App](https://github.com/facebook/create-react-app) 创建。
+## 📖 Project Introduction
+
+React Calculator 是一个基于 **React + Redux Toolkit** 构建的计算器 Web 应用，并与 **AcWing 后端接口**进行交互，实现了完整的 **登录 / 注册 / 计算器操作 / 登录状态管理**流程。
+
+该项目主要用于练习：
+
+- React 组件化开发
+- Redux 状态管理
+- React Router 路由控制
+- 前后端接口通信
+
+---
+
+# 🚀 Features
+
+### 🔐 用户认证系统
+
+- 登录
+- 注册
+- 登录状态检测 (`get_status`)
+- 用户退出 (`logout`)
+
+### 🧮 计算器功能
+
+- 数字输入
+- 四则运算
+- 删除输入
+- 清空输入
+- 运算结果计算
+
+### ⚡ 状态管理
+
+使用 **Redux Toolkit** 管理计算器状态：
+
+- `currentOperand`
+- `lastOperand`
+- `operation`
+
+### 🌐 前后端通信
+
+通过 **jQuery AJAX** 调用 AcWing 后端接口：
+
+- 登录
+- 注册
+- 获取登录状态
+- 退出登录
+
+登录成功后，前端自动更新状态并跳转计算器页面。
+
+### 📦 路由控制
+
+基于 **React Router DOM v7** 实现：
+
+- 登录状态控制访问权限
+- 未登录自动跳转登录页面
+- 404 页面处理
+
+---
+
+# 🛠 Tech Stack
+
+| 技术 | 说明 |
+|----|----|
+| React 19 | 前端 UI 框架 |
+| React Router DOM 7 | 前端路由 |
+| Redux Toolkit | 状态管理 |
+| React Redux | Redux 与 React 连接 |
+| Bootstrap 5 | UI 样式 |
+| jQuery | AJAX 请求 |
+
+---
+
+# 📂 Project Structure
+
+```
+src
+│
+├── index.js                # 应用入口
+├── index.css               # 全局样式
+│
+├── components
+│   ├── app.jsx             # 根组件
+│   ├── navbar.jsx          # 导航栏
+│   │
+│   └── content
+│       ├── base.jsx        # 页面基础布局
+│       ├── home.jsx        # 首页
+│       ├── calculator.jsx  # 计算器页面
+│       │
+│       ├── calculator
+│       │   ├── digitButton.jsx
+│       │   └── operationButton.jsx
+│       │
+│       ├── login.jsx       # 登录页面
+│       ├── register.jsx    # 注册页面
+│       └── notfound.jsx    # 404 页面
+│
+└── redux
+    ├── store.js            # Redux Store
+    ├── reducer.js          # 计算器状态
+    └── actions.js          # Redux Actions
+```
+
+---
+
+# 🌐 Routes
+
+| Route | Description |
+|------|-------------|
+| `/` | 重定向到 `/calculator` |
+| `/calculator` | 首页 |
+| `/calculator/home` | 首页 |
+| `/calculator/calculator` | 计算器页面（需登录） |
+| `/calculator/login` | 登录 |
+| `/calculator/register` | 注册 |
+| `/calculator/404` | 404 页面 |
+| `/calculator/*` | 未匹配路径 |
+
+---
+
+# 🔗 Backend API (AcWing)
+
+| API | Description |
+|----|----|
+| `/calculator/get_status/` | 获取登录状态 |
+| `/calculator/login/` | 用户登录 |
+| `/calculator/register/` | 用户注册 |
+| `/calculator/logout/` | 用户退出 |
+
+示例返回：
+
+```json
+{
+  "result": "login",
+  "username": "user"
+}
+```
+
+---
+
+# ⚙️ Installation
+
+```bash
+npm install
+```
+
+---
+
+# ▶️ Run Project
+
+```bash
+npm start
+```
+
+浏览器访问：
+
+```
+http://localhost:3000
+```
+
+根路径会自动重定向到：
+
+```
+/calculator
+```
+
+---
+
+# 📦 Build
+
+```bash
+npm run build
+```
+
+生成生产环境代码：
+
+```
+build/
+```
+
+---
+
+# 🧪 Test
+
+```bash
+npm test
+```
+
+---
+
+# 📌 Notes
+
+本项目基于 **Create React App** 创建，主要用于练习：
+
+- React Router 路由管理
+- Redux 状态管理
+- 前后端登录状态同步
+- React 组件结构设计
+
+---
+
+# 📚 Learn More
+
+React  
+https://react.dev
+
+Redux Toolkit  
+https://redux-toolkit.js.org
+
+React Router  
+https://reactrouter.com
